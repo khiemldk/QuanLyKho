@@ -28,6 +28,12 @@ public class roles extends Common{
 			)
 	Set<users> users; 
 	
+	public Set<menu> getMenu() {
+		return menu;
+	}
+	public void setMenu(Set<menu> menu) {
+		this.menu = menu;
+	}
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
 		name="auth",
