@@ -143,23 +143,23 @@ public class TrangChu {
 //		setMenu.add(mn1);
 //		rl.setMenu(setMenu);
 //		ss.save(rl);
-		product_in_stock pis = new product_in_stock();
-		pis.setPrice(1000);
-		pis.setQty(1);
-		product_in_stock pis1 = new product_in_stock();
-		pis1.setPrice(2000);
-		pis1.setQty(2);
-		
-		product prd = new product();
-		prd.setName("XXX");
-		prd.setCode("xxx");
-		prd.setDescription("test product_in_stock");
-		pis.setProduct(prd);
-		pis1.setProduct(prd);
-		
-		ss.save(pis);
-		ss.save(pis1);
-		return "trangchu";
+//		product_in_stock pis = new product_in_stock();
+//		pis.setPrice(1000);
+//		pis.setQty(1);
+//		product_in_stock pis1 = new product_in_stock();
+//		pis1.setPrice(2000);
+//		pis1.setQty(2);
+//		
+//		product prd = new product();
+//		prd.setName("XXX");
+//		prd.setCode("xxx");
+//		prd.setDescription("test product_in_stock");
+//		pis.setProduct(prd);
+//		pis1.setProduct(prd);
+//		
+//		ss.save(pis);
+//		ss.save(pis1);
+		return "home";
 	}
 
 }
