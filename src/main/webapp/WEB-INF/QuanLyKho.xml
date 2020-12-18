@@ -15,8 +15,7 @@
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-	<context:component-scan
-		base-package="Controller"></context:component-scan>
+	<context:component-scan base-package="QuanLyKho"></context:component-scan>
 	<mvc:annotation-driven
 		enable-matrix-variables="true" />
 	<mvc:resources location="/resources/"
@@ -37,13 +36,29 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="Entity"></property>
+		<property name="packagesToScan" value="QuanLyKho.Entity"></property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
 			</props>
 		</property>
+
+		<!-- <property name="mappingResources"> -->
+		<!-- <list> -->
+		<!-- <value>QuanLyKho/Entity/Auth.hbm.xml</value> -->
+		<!-- <value>QuanLyKho/Entity/Category.hbm.xml</value> -->
+		<!-- <value>QuanLyKho/Entity/History.hbm.xml</value> -->
+		<!-- <value>QuanLyKho/Entity/Invoice.hbm.xml</value> -->
+		<!-- <value>QuanLyKho/Entity/Menu.hbm.xml</value> -->
+		<!-- <value>QuanLyKho/Entity/Product.hbm.xml</value> -->
+		<!-- <value>QuanLyKho/Entity/ProductInStock.hbm.xml</value> -->
+		<!-- <value>QuanLyKho/Entity/Roles.hbm.xml</value> -->
+		<!-- <value>QuanLyKho/Entity/UserRole.hbm.xml</value> -->
+		<!-- <value>QuanLyKho/Entity/Users.hbm.xml</value> -->
+		<!-- </list> -->
+		<!-- </property> -->
 	</bean>
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
@@ -65,4 +80,17 @@
 			</list>
 		</property>
 	</bean>
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="/message/message"></property>
+	</bean>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/login" />
+			<mvc:exclude-mapping path="/processLogin" />
+			<mvc:exclude-mapping path="/resouces/**" />
+			<bean class="QuanLyKho.Security.FilterSystem" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
