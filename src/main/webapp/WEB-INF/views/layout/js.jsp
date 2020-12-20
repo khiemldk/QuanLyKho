@@ -1,6 +1,6 @@
     	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <!-- jQuery -->
-    <script src="<c:url value="/resources/vendors/jquery/dist/jquery.min.js"/>" ></script>
+    	 <!-- jQuery -->
+
     <!-- Bootstrap -->
    <script src="<c:url value="/resources/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"/>" ></script>
     <!-- FastClick -->
@@ -12,3 +12,5 @@
 
     <!-- Custom Theme Scripts -->
     <script src="<c:url value="/resources/build/js/custom.min.js"/>" ></script>
+    
+    

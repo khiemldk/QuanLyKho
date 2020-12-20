@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
 	<jsp:include page="css.jsp"></jsp:include>
+	<jsp:include page="jquery.jsp"></jsp:include>
     <title>Quan Ly Kho</title>
   </head>
 

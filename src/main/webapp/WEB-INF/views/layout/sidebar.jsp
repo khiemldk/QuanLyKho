@@ -7,11 +7,11 @@
 		<ul class="nav side-menu">
 			<c:forEach items="${menu }" var="listMenu">
 				<li>
-			<a><i class="fa fa-home" id="${listMenu.getIdMenu() }"></i> ${listMenu.getName() } <span
+			<a><i class="fa fa-home" id="${listMenu.getIdMenu() }"></i> ${listMenu.getName() }<span
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
 					<c:forEach items="${listMenu.getChild() }" var="child">
-						<li><a id="${child.getIdMenu() }"> ${child.getName()} </a></li>
+						<li><a id="${child.getIdMenu() }" href="<c:url value="${child.url}"/>"> ${child.getName()}</a></li>
 					</c:forEach>
 					
 					

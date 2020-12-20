@@ -28,6 +28,10 @@ public class TrangChu {
 //	SessionFactory sessionFactory;
 	
 	
+	@GetMapping("/")
+	public String defaults() {
+		return "redirect:/home";
+	}
 //	@Transactional
 	@GetMapping("/home")
 	public String trangchu() {

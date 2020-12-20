@@ -16,4 +16,10 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/home.jsp"></put-attribute>
 	</definition>
+	<definition name="category-action" extends="master">
+		<put-attribute name="body" value="/WEB-INF/views/Category/Category-action.jsp"></put-attribute>
+	</definition>
+	<definition name="category-list" extends="master">
+		<put-attribute name="body" value="/WEB-INF/views/Category/category-list.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>
