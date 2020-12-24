@@ -41,7 +41,7 @@ public class menu {
 	public void setIdMenu(String idMenu) {
 		this.idMenu = idMenu;
 	}
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	@JoinColumn(name="menu_id")
 	Set<auth> auths;
 	
@@ -57,7 +57,7 @@ public class menu {
 	public void setRoles(Set<roles> roles) {
 		this.roles = roles;
 	}
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(
 		name="auth",
 		joinColumns = {@JoinColumn(name="menu_id",referencedColumnName = "id")},

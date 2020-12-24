@@ -20,11 +20,11 @@ public class auth {
 	public Date create_date;
 	public Date update_date;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="role_id")
 	roles roles;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="menu_id")
 	menu menu;
 	

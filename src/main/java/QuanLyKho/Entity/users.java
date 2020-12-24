@@ -23,7 +23,7 @@ public class users {
 	private String email;
 	private String name;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	@JoinColumn(name = "user_id")
 	Set<user_role> user_roles;
 	
@@ -35,7 +35,7 @@ public class users {
 	public void setUser_roles(Set<user_role> user_roles) {
 		this.user_roles = user_roles;
 	}
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(
 	name = "user_role",
 	joinColumns = {@JoinColumn(name="user_id",referencedColumnName = "id")},

@@ -21,7 +21,7 @@ public class roles {
 	private String role_name;
 	private String description;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(
 	name="user_role",
 	joinColumns = @JoinColumn(name="role_id",referencedColumnName = "id"),
@@ -35,7 +35,7 @@ public class roles {
 	public void setMenu(Set<menu> menu) {
 		this.menu = menu;
 	}
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(
 		name="auth",
 		joinColumns = {@JoinColumn(name="role_id",referencedColumnName = "id")},
@@ -44,11 +44,11 @@ public class roles {
 	Set<menu> menu;
 	
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	@JoinColumn(name="role_id")
 	Set<user_role> user_roles;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	@JoinColumn(name="role_id")
 	Set<auth> auths;
 	

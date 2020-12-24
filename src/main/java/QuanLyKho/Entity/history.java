@@ -26,13 +26,12 @@ public class history {
 	public void setProduct(product product) {
 		this.product = product;
 	}
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="product_id")
 	product product;
 	
 	public history() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	public history(String action_name,int type,int qty,double price,Boolean active_flag, Date create_date, Date update_date) {
 

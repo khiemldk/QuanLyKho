@@ -2,6 +2,9 @@ package QuanLyKho.Controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +17,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import QuanLyKho.Entity.Page;
 import QuanLyKho.Entity.category;
 import QuanLyKho.Service.ProductService;
 import QuanLyKho.Validate.CategoryValidator;
 
 @Controller
 public class CategoryController {
-	
+	public final static Logger log4j = Logger.getLogger(CategoryController.class);
 	@Autowired
 	ProductService productService;
 	@Autowired
@@ -32,11 +36,28 @@ public class CategoryController {
 			binder.setValidator(categoryValidator);
 		}
 	}
-	
-	@GetMapping("/category/list")
-	public String showList(Model model) {
-		List<category> listCate = productService.getAll();
+	@GetMapping(value= {"/category/list","/category/list/"})
+	public String redirect() {
+		return "redirect:/category/list/1";
+	}
+//	@GetMapping("/category/list")
+//	public String showList(Model model) {
+////		Page page = new Page(3);
+////		page.setCurrentPage();
+//		List<category> listCate = productService.getAll();
+//		model.addAttribute("listCate", listCate);
+////		model.addAttribute("pageInfo", page);
+//		return "category-list";
+//	}
+	@GetMapping("/category/list/{currentPage}")
+	public String showList(Model model,@PathVariable("currentPage") int currentPage) {
+		
+		Page page = new Page(3);
+		page.setCurrentPage(currentPage);
+		List<category> listCate = productService.getAllPae(page);
+		log4j.info("Page : " +page.getTotalPages());
 		model.addAttribute("listCate", listCate);
+		model.addAttribute("pageInfo", page);
 		return "category-list";
 	}
 	@GetMapping("/category/add")
@@ -79,7 +100,7 @@ public class CategoryController {
 	}
 	
 	@PostMapping("/category/save")
-	public String saveCate(Model model,@ModelAttribute("categoryForm") @Validated category category, BindingResult result) {
+	public String saveCate(Model model,@ModelAttribute("categoryForm") @Validated category category, BindingResult result ) {
 		if (result.hasErrors()) {
 			return "category-action";
 		}
@@ -90,7 +111,8 @@ public class CategoryController {
 			productService.insertCategory(category);
 			model.addAttribute("message", "Insert success");
 		}
-		return showList(model);
+		int currentPage=0;
+		return "redirect:/category/list";
 	}
 	
 }

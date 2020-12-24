@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="right_col" role="main">
 	<div class="">
 		<div class="page-title">
@@ -42,30 +42,48 @@
 									</c:if>
 									<tr class="${cssTr }">
 
-										<td class=" ">${i.index+1 }</td>
+										<td class=" ">${pageInfo.getOffset()+i.index+1 }</td>
 										<td class=" ">${list.getId() }</td>
 										<td class=" ">${list.getName() }</td>
 										<td class=" ">${list.getCode() }</td>
 										<td class=" ">${list.getDescription()}</td>
-										<td class="text-center"><a href='<c:url value="/category/view/${list.getId() }"/>'
+										<td class="text-center"><a
+											href='<c:url value="/category/view/${list.getId() }"/>'
 											class="btn btn-round btn-secondary">View</a></td>
-										<td class="text-center"><a href='<c:url value="/category/edit/${list.getId() }"/>'
+										<td class="text-center"><a
+											href='<c:url value="/category/edit/${list.getId() }"/>'
 											class="btn btn-round btn-primary">Edit</a></td>
-										<td class="text-center"><a href="javascript:void(0);" onclick="confirmDelete(${list.getId()});"
+										<td class="text-center"><a href="javascript:void(0);"
+											onclick="confirmDelete(${list.getId()});"
 											class="btn btn-round btn-danger">Delete</a></td>
 									</tr>
 								</c:forEach>
-
 							</tbody>
 						</table>
+						<ul class="pagination">
+							<c:forEach begin="1" end="${pageInfo.totalPages}"
+								varStatus="loop">
+								<c:choose>
+									<c:when test="${pageInfo.currentPage== loop.index}">
+										<li class="active" style="border: 5px solid #1ABB9C;"><a href="javascript:void(0);">${loop.index}</a></li>
+									</c:when>
+									<c:otherwise>
+										<li style="border: 5px solid;"><a
+											href="<c:url value="/category/list/${loop.index}"/>">${loop.index}</a></li>
+									</c:otherwise>
+								</c:choose>
+
+								<li></li>
+							</c:forEach>
+						</ul>
 					</div>
 
 
 				</div>
-				<div class="container" >
-					<a class="btn btn-app" href='<c:url value="/category/add"/>'>
-                    <i class="fa fa-plus"></i> Add New Cate
-                  </a>
+				<div class="container">
+					<a class="btn btn-app" href='<c:url value="/category/add"/>'> <i
+						class="fa fa-plus"></i> Add New Cate
+					</a>
 				</div>
 			</div>
 		</div>
@@ -77,4 +95,5 @@ function confirmDelete(id){
 		window.location.href= '<c:url value="/category/delete/"/>'+id
 	}
 }
+
 </script>

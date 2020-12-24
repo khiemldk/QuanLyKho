@@ -30,6 +30,7 @@ public class FilterSystem implements HandlerInterceptor{
 				response.sendRedirect(request.getContextPath()+"/error-denied");
 				return false;
 			}
+			
 		}
 		return true;
 	}
@@ -42,6 +43,7 @@ public class FilterSystem implements HandlerInterceptor{
 		Set<auth> auths = userRole.getRoles().getAuths();
 		for(Object obj : auths) {
 			auth auth = (auth) obj;
+			log4j.info("maybe : " + url + " " + auth.getMenu().getUrl() );
 			if(url.contains(auth.getMenu().getUrl())) {
 				return auth.getPermision() == 1 ;
 			}

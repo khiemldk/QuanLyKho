@@ -18,7 +18,7 @@ public class product_in_stock {
 	private int qty;
 	private double price;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="product_id")
 	product product;
 	

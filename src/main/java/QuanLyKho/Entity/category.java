@@ -21,7 +21,7 @@ public class category {
 	private String code;
 	private String description;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	@JoinColumn(name="cate_id")
 	Set<product> product;
 	

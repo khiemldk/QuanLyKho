@@ -24,19 +24,19 @@ public class product {
 	private String description;
 	private String img_url;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="cate_id")
 	category category;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	@JoinColumn(name="product_id")
 	Set<product_in_stock> product_in_stock;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	@JoinColumn(name="product_id")
 	Set<history> history;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	@JoinColumn(name="product_id")
 	Set<invoice> invoice;
 	public Set<history> getHistory() {
