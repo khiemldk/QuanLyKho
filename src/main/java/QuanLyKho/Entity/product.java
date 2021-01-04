@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,19 +26,16 @@ public class product {
 	private String img_url;
 	
 	@ManyToOne
-	@JoinColumn(name="cate_id")
+	@JoinColumn(name="cate_id", updatable = false)
 	category category;
 	
-	@OneToMany
-	@JoinColumn(name="product_id")
+	@OneToMany(mappedBy = "product")
 	Set<product_in_stock> product_in_stock;
 	
-	@OneToMany
-	@JoinColumn(name="product_id")
+	@OneToMany(mappedBy = "product")
 	Set<history> history;
 	
-	@OneToMany
-	@JoinColumn(name="product_id")
+	@OneToMany(mappedBy = "product")
 	Set<invoice> invoice;
 	public Set<history> getHistory() {
 		return history;

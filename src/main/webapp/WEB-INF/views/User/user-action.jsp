@@ -43,7 +43,8 @@
 								<label for="middle-name"
 									class="col-form-label col-md-3 col-sm-3 label-align">Password</label>
 								<div class="col-md-6 col-sm-6 ">
-									<form:input path="password" cssClass="form-control" />
+									<form:password path="password" cssClass="form-control"  />
+									
 								</div>
 							</div>
 							<div class="item form-group">
@@ -53,6 +54,26 @@
 									<form:input path="email" cssClass="form-control" />
 								</div>
 							</div>
+<!-- 							<div class="item form-group"> -->
+<!-- 								<label for="middle-name" -->
+<!-- 									class="col-form-label col-md-3 col-sm-3 label-align">Role</label> -->
+<!-- 								<div class="col-md-6 col-sm-6 "> -->
+<%-- 									<form:input path="user_roles" cssClass="form-control" /> --%>
+<!-- 								</div> -->
+<!-- 							</div> -->
+							<c:if test="${checkInUp==false }">
+								<div class="item form-group">
+								<label class="col-form-label col-md-3 col-sm-3 label-align"
+									for="last-name">Role<span class="required">*</span>
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<form:select path="roleId" cssClass="form-control" >
+										<form:options  items="${idRole}" />
+									</form:select>
+
+								</div>
+							</div>
+							</c:if>
 							<div class="ln_solid"></div>
 							<div class="item form-group">
 								<div class="col-md-6 col-sm-6 offset-md-3">

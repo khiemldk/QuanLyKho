@@ -2,6 +2,7 @@ package QuanLyKho.Entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -25,9 +26,9 @@ public class menu {
 	private String name;
 	private int order_index;
 	@Transient
-	private String idMenu; // 2 thằng này t thêm vào
+	private String idMenu; 
 	@Transient
-	private List<menu> child; // đây nữa . nhưng chỉ thằng này bị lỗi
+	private List<menu> child; 
 	
 	public List<menu> getChild() {
 		return child;
@@ -41,8 +42,7 @@ public class menu {
 	public void setIdMenu(String idMenu) {
 		this.idMenu = idMenu;
 	}
-	@OneToMany
-	@JoinColumn(name="menu_id")
+	@OneToMany(mappedBy = "menu")
 	Set<auth> auths;
 	
 	public Set<auth> getAuths() {
@@ -51,19 +51,8 @@ public class menu {
 	public void setAuths(Set<auth> auths) {
 		this.auths = auths;
 	}
-	public Set<roles> getRoles() {
-		return roles;
-	}
-	public void setRoles(Set<roles> roles) {
-		this.roles = roles;
-	}
-	@ManyToMany
-	@JoinTable(
-		name="auth",
-		joinColumns = {@JoinColumn(name="menu_id",referencedColumnName = "id")},
-		inverseJoinColumns = {@JoinColumn(name="role_id",referencedColumnName = "id")}
-			)
-	Set<roles> roles;
+
+
 	
 	public menu() {
 		super();
@@ -132,6 +121,15 @@ public class menu {
 	}
 	public void setUpdate_date(Date update_date) {
 		this.update_date = update_date;
+	}
+	@Transient
+	private Map<Integer,Integer> mapAuth;
+
+	public Map<Integer, Integer> getMapAuth() {
+		return mapAuth;
+	}
+	public void setMapAuth(Map<Integer, Integer> mapAuth) {
+		this.mapAuth = mapAuth;
 	}
 	
 	

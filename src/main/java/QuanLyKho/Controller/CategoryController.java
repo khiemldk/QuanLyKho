@@ -1,5 +1,6 @@
 package QuanLyKho.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -51,10 +52,15 @@ public class CategoryController {
 //	}
 	@GetMapping("/category/list/{currentPage}")
 	public String showList(Model model,@PathVariable("currentPage") int currentPage) {
-		
+		if (currentPage==  0)
+			currentPage = 1;
 		Page page = new Page(3);
 		page.setCurrentPage(currentPage);
+		
 		List<category> listCate = productService.getAllPae(page);
+		if (currentPage>=page.getTotalPages())
+			currentPage=page.getTotalPages()-1;
+		model.addAttribute("crpage",currentPage );
 		log4j.info("Page : " +page.getTotalPages());
 		model.addAttribute("listCate", listCate);
 		model.addAttribute("pageInfo", page);

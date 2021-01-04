@@ -11,6 +11,7 @@ import org.springframework.validation.Validator;
 
 import QuanLyKho.Entity.users;
 import QuanLyKho.Service.UserService;
+import QuanLyKho.Untils.Encrypt;
 
 @Component
 public class LoginValidator implements Validator{
@@ -26,15 +27,15 @@ public class LoginValidator implements Validator{
 		users users = (users) target;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "msg.required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "msg.required");
-		System.out.println("ALO1----------------------------------------------------");
+//		System.out.println("ALO1----------------------------------------------------");
 		if (!StringUtils.isEmpty(users.getUsername()) && !StringUtils.isEmpty(users.getPassword())) {
-			System.out.println("ALO3----------------------------------------------------");
+//			System.out.println("ALO3----------------------------------------------------");
 			List<users> listUser = userService.findByProperty("username", users.getUsername());
 			System.out.println(users.getUsername());
 			System.out.println("ALO2----------------------------------------------------");
 			if (users != null && !listUser.isEmpty()) {
 				System.out.println("ALO4----------------------------------------------------");
-				if (! listUser.get(0).getPassword().equals(users.getPassword()) ) {
+				if (! listUser.get(0).getPassword().equals(Encrypt.encrypt(users.getPassword())) ) {
 					errors.rejectValue("password", "msg.wrong.password");
 				}
 			} else {

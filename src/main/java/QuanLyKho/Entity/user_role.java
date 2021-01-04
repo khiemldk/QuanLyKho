@@ -17,11 +17,11 @@ public class user_role {
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name="role_id")
+	@JoinColumn(name="role_id", updatable = false)
 	roles roles;
 	
 	@ManyToOne
-	@JoinColumn(name ="user_id ")
+	@JoinColumn(name ="user_id ", updatable = false)
 	users users;
 	
 	public roles getRoles() {
@@ -37,7 +37,7 @@ public class user_role {
 		this.users = users;
 	}
 	public user_role() {
-		super();
+
 		// TODO Auto-generated constructor stub
 	}
 	public user_role(Boolean active_flag, Date create_date, Date update_date) {

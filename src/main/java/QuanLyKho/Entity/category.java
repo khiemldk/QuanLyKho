@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,8 +22,7 @@ public class category {
 	private String code;
 	private String description;
 	
-	@OneToMany
-	@JoinColumn(name="cate_id")
+	@OneToMany(mappedBy = "category")
 	Set<product> product;
 	
 	public Set<product> getProduct() {

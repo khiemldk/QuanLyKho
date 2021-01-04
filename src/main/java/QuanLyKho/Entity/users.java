@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity
 public class users {
@@ -22,9 +23,16 @@ public class users {
 	private String password;
 	private String email;
 	private String name;
+	@Transient
+	private int roleId;
 	
-	@OneToMany
-	@JoinColumn(name = "user_id")
+	public int getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
+	@OneToMany(mappedBy = "users")
 	Set<user_role> user_roles;
 	
 	
@@ -35,20 +43,7 @@ public class users {
 	public void setUser_roles(Set<user_role> user_roles) {
 		this.user_roles = user_roles;
 	}
-	@ManyToMany
-	@JoinTable(
-	name = "user_role",
-	joinColumns = {@JoinColumn(name="user_id",referencedColumnName = "id")},
-	inverseJoinColumns = {@JoinColumn(name="role_id",referencedColumnName = "id")}	
-			)
-	Set<roles> roles;
-	
-	public Set<roles> getRoles() {
-		return roles;
-	}
-	public void setRoles(Set<roles> roles) {
-		this.roles = roles;
-	}
+
 	public users() {
 		super();
 		// TODO Auto-generated constructor stub

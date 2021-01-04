@@ -1,14 +1,21 @@
 package QuanLyKho.Entity;
 
+import java.time.LocalDate;
+
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class history {
@@ -19,7 +26,14 @@ public class history {
 	private int type;
 	private int qty;
 	private double price;
-	
+	@Transient
+	public String tmp;
+	public String getTmp() {
+		return tmp;
+	}
+	public void setTmp(String tmp) {
+		this.tmp = tmp;
+	}
 	public product getProduct() {
 		return product;
 	}
@@ -31,6 +45,9 @@ public class history {
 	product product;
 	
 	public history() {
+//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//		update_date = Date.parse(formatter.toString());
+    
 		
 	}
 	public history(String action_name,int type,int qty,double price,Boolean active_flag, Date create_date, Date update_date) {

@@ -19,7 +19,7 @@
 						<a class="dropdown-item" href="javascript:;"> Profile</a> <a
 							class="dropdown-item" href="javascript:;"> <span
 							class="badge bg-red pull-right">50%</span> <span>Settings</span>
-						</a> <a class="dropdown-item" href="javascript:;">Help</a> <a
+						</a> <a class="dropdown-item" href="<c:url value="/user/list/changePass/${userInfor.getId()}"/>">Change Password</a> <a
 							class="dropdown-item" href="<c:url value="/logout"/>"><i
 							class="fa fa-sign-out pull-right"></i> Log Out</a>
 					</div>

@@ -21,35 +21,10 @@ public class roles {
 	private String role_name;
 	private String description;
 	
-	@ManyToMany
-	@JoinTable(
-	name="user_role",
-	joinColumns = @JoinColumn(name="role_id",referencedColumnName = "id"),
-	inverseJoinColumns = @JoinColumn(name="user_id",referencedColumnName = "id")
-			)
-	Set<users> users; 
-	
-	public Set<menu> getMenu() {
-		return menu;
-	}
-	public void setMenu(Set<menu> menu) {
-		this.menu = menu;
-	}
-	@ManyToMany
-	@JoinTable(
-		name="auth",
-		joinColumns = {@JoinColumn(name="role_id",referencedColumnName = "id")},
-		inverseJoinColumns = {@JoinColumn(name="menu_id",referencedColumnName = "id")}
-			)
-	Set<menu> menu;
-	
-	
-	@OneToMany
-	@JoinColumn(name="role_id")
+	@OneToMany(mappedBy = "roles")
 	Set<user_role> user_roles;
 	
-	@OneToMany
-	@JoinColumn(name="role_id")
+	@OneToMany(mappedBy = "roles")
 	Set<auth> auths;
 	
 	
@@ -65,12 +40,7 @@ public class roles {
 	public void setUser_roles(Set<user_role> user_roles) {
 		this.user_roles = user_roles;
 	}
-	public Set<users> getUsers() {
-		return users;
-	}
-	public void setUsers(Set<users> users) {
-		this.users = users;
-	}
+	
 	public roles() {
 		super();
 		// TODO Auto-generated constructor stub

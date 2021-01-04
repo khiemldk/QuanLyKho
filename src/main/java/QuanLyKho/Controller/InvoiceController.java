@@ -30,19 +30,47 @@ public class InvoiceController {
 	InvoiceService invoiceService;
 	@Autowired
 	ProductService productService;
-	@GetMapping("/goods-recept/list")
-	public String Invoice1(Model model) {
-		List<invoice> invoices =invoiceService.GetInOuT("type", 1);
+	@GetMapping({"/goods-recept/list","/goods-recept/list/"})
+	public String redirect() {
+		return "redirect:/goods-recept/list/1";
+	}
+	@GetMapping({"/goods-issue/list","/goods-issue/list/"})
+	public String redirect1() {
+		return "redirect:/goods-issue/list/1";
+	}
+	
+	@GetMapping("/goods-recept/list/{currentPage}")
+	public String Invoice1(Model model,@PathVariable("currentPage") int currentPage) {
+		if (currentPage==0)
+			currentPage=1;
+		Page pg = new Page(3);
+		pg.setCurrentPage(currentPage);
+		
+		List<invoice> invoices =invoiceService.GetInOuT("type", 1,pg);
+		if (currentPage>=pg.getTotalPages())
+			currentPage=pg.getTotalPages()-1;
+		model.addAttribute("crpage", currentPage);
 		model.addAttribute(Constant.type, 1);
 		model.addAttribute("listInvoice", invoices);
+		model.addAttribute("pageInfo", pg);
 		return "goods-recept-list";
 	}
-	@GetMapping("/goods-issue/list")
-	public String Invoice0(Model model) {
-		List<invoice> invoices =invoiceService.GetInOuT("type", 0);
+	@GetMapping("/goods-issue/list/{currentPage}")
+	public String Invoice0(Model model,@PathVariable("currentPage") int currentPage) {
+		if (currentPage==0)
+			currentPage=1;
+		Page pg = new Page(3);
+		pg.setCurrentPage(currentPage);
+		
+		List<invoice> invoices =invoiceService.GetInOuT("type", 0,pg);
+		if (currentPage>=pg.getTotalPages())
+			currentPage=pg.getTotalPages()-1;
+		System.out.println("total la : " + pg.getTotalPages());
+		model.addAttribute("crpage", currentPage);
 		model.addAttribute(Constant.type, 0);
 		model.addAttribute("listInvoice", invoices);
-		return "goods-recept-list";
+		model.addAttribute("pageInfo", pg);
+		return "goods-issue-list";
 	}
 	@PostMapping("/goods-recept/list/save")
 	public String XuLyAction(Model model,@ModelAttribute("InvoiceForm") invoice invoice,BindingResult result) {
@@ -53,8 +81,16 @@ public class InvoiceController {
 	public String update(Model model,@PathVariable int id) {
 		invoice invoice = invoiceService.findByID(id);
 		model.addAttribute("InvoiceForm", invoice);
-		model.addAttribute("idList", getIdProduct());
+		model.addAttribute("idList", getIdProduct1());
 		return "goods-recept-action";
+	}
+	public Map<String, String> getIdProduct1( ){
+		List<product> product = productService.getAllProducts();
+		Map<String, String> map = new HashMap<>();
+		for(product pr : product) {
+			map.put(String.valueOf(pr.getId()), pr.getName());
+		}
+		return map;
 	}
 	public List<Integer> getIdProduct( ){
 		List<product> product = productService.getAllProducts();
@@ -73,7 +109,7 @@ public class InvoiceController {
 	@GetMapping("goods-recept/list/FormSearch")
 	public String FormSearch(Model model) {
 		model.addAttribute("SearchForm", new invoice());
-		model.addAttribute("idList", getIdProduct());
+		model.addAttribute("idList", getIdProduct1());
 		return "goods-recept-search";
 	}
 	@PostMapping("goods-recept/list/search")
@@ -83,7 +119,7 @@ public class InvoiceController {
 		map.put("product.id", invoice.getProduct().getId());
 		map.put("type", invoice.getType());
 		
-		List<invoice> invoices =invoiceService.Search(map);;
+		List<invoice> invoices =invoiceService.Search(map);
 		model.addAttribute("listInvoice", invoices);
 		return "goods-recept-list";
 
@@ -91,7 +127,7 @@ public class InvoiceController {
 	@GetMapping("/goods-issue/list/export/{type}")
 	public ModelAndView exprot(@PathVariable("type") int type) {
 		ModelAndView modelAndView = new ModelAndView();
-		List<invoice> invoice = invoiceService.GetInOuT("type", type);
+		List<invoice> invoice = invoiceService.GetInOuT("type", type,null);
 		modelAndView.addObject(Constant.ExportStockFIle, invoice);
 		modelAndView.setView(new ExportFile());
 		return modelAndView;

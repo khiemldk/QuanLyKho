@@ -2,6 +2,7 @@ package QuanLyKho.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,7 +48,7 @@ public class ProductInStockService {
 	}
 	
 	public List<product_in_stock> findProductInStockByProp(String prop,Object value){
-		return productInStockDAO.findByProperty(prop, value);
+		return productInStockDAO.findByProperty(prop, value,null);
 	}
 	public product_in_stock findByID(int id) {
 		return productInStockDAO.findById(product_in_stock.class, id);
@@ -70,6 +71,9 @@ public class ProductInStockService {
 		return historyDAO.findAllAndPage(page);
 	}
 	public List<history> InOut(String prop,Object value){
-		return historyDAO.findByProperty(prop, value);
+		return historyDAO.findByProperty(prop, value,null);
+	}
+	public List<Object[]> ThongKe(Map<String, Object> map,history history){
+		return historyDAO.ThongKe(map, history);
 	}
 }

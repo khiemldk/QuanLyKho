@@ -1,6 +1,9 @@
 package QuanLyKho.Controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,6 +29,7 @@ import QuanLyKho.Entity.history;
 import QuanLyKho.Entity.product;
 import QuanLyKho.Entity.product_in_stock;
 import QuanLyKho.Service.ProductInStockService;
+import QuanLyKho.Service.ProductService;
 import QuanLyKho.Untils.Constant;
 
 @Controller
@@ -35,17 +39,29 @@ public class ProductInStockController {
 	final static Logger log4j = Logger.getLogger(ProductInStockController.class);
 	static int getQty = 0,checkOut = 0;
 	
-	@GetMapping("/product-in-stock/list")
-	public String getAll(Model model) {
-		List<product_in_stock> product_in_stocks = productInStockService.getAll();
+	@GetMapping({"/product-in-stock/list","/product-in-stock/list/"})
+	public String redirect() {
+		return "redirect:/product-in-stock/list/1";
+	}
+	@GetMapping("/product-in-stock/list/{currentPage}")
+	public String getAll(Model model,@PathVariable("currentPage") int currentPage) {
+		if (currentPage==  0)
+			currentPage = 1;
+		Page page = new Page(3);
+		page.setCurrentPage(currentPage);
+		List<product_in_stock> product_in_stocks = productInStockService.getAll1(page);
+		if (currentPage>=page.getTotalPages())
+			currentPage=page.getTotalPages()-1;
+		model.addAttribute("crpage",currentPage );
 		model.addAttribute("listStocks", product_in_stocks);
+		model.addAttribute("pageInfo", page);
 		return "product-stock-list";
 	}
 	@GetMapping("/product-in-stock/input")
 	public String Input(Model model) {
 
 		model.addAttribute("StockForm",new product_in_stock());
-
+		model.addAttribute("idList", getIdProduct1());
 		return "product-stock-action";
 	}
 	@GetMapping("/product-in-stock/output/{id}")
@@ -53,6 +69,7 @@ public class ProductInStockController {
 		product_in_stock product_in_stock = productInStockService.findByID(id);
 		if (product_in_stock!=null) {
 			model.addAttribute("StockForm", product_in_stock);
+			model.addAttribute("idList", getIdProduct1());
 			getQty = product_in_stock.getQty();
 			checkOut=1;
 			return "product-stock-action";
@@ -65,6 +82,7 @@ public class ProductInStockController {
 		product_in_stock product_in_stock = productInStockService.findByID(id);
 		if (product_in_stock!=null) {
 			model.addAttribute("StockForm", product_in_stock);
+			model.addAttribute("idList", getIdProduct1());
 			getQty = product_in_stock.getQty();
 			checkOut=0;
 			return "product-stock-action";
@@ -97,7 +115,7 @@ public class ProductInStockController {
 		history.setProduct(product_in_stock.getProduct());
 		
 		productInStockService.insertHistory(history);
-		return getAll(model);
+		return "redirect:/product-in-stock/list";
 	}
 	@GetMapping("/product-in-stock/delete/{id}")
 	public String Delete(Model model,@PathVariable int id) {
@@ -108,6 +126,24 @@ public class ProductInStockController {
 		return "redirect:/product-in-stock/list";
 		
 	}
-	
+	@Autowired
+	ProductService productService;
+	public List<Integer> getIdProduct( ){
+		List<product> product = productService.getAllProducts();
+		List<Integer> idList = new ArrayList<>();
+		for(product pr : product) {
+			idList.add(pr.getId());
+			log4j.info("this is product id "+pr.getId());
+		}
+		return idList;
+	}
+	public Map<String, String> getIdProduct1( ){
+		List<product> product = productService.getAllProducts();
+		Map<String, String> map = new HashMap<>();
+		for(product pr : product) {
+			map.put(String.valueOf(pr.getId()), pr.getName());
+		}
+		return map;
+	}
 
 }

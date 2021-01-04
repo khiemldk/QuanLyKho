@@ -22,9 +22,15 @@ public class ProductInfor {
 	}
 	@GetMapping("/product-info/list/{index}")
 	public String productList(Model model ,@PathVariable("index") int index) {
+		if (index ==0)
+			 index  = 1;
 		Page page = new Page(3);
 		page.setCurrentPage(index);
+		
 		List<product>listProduct = productService.getAllProducts1(page);
+		if (index>=page.getTotalPages())
+			index=page.getTotalPages()-1;
+		model.addAttribute("crpage", index);
 		model.addAttribute("pageInfo", page);
 		model.addAttribute("listProduct", listProduct);
 		return "product-list";

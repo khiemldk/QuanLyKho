@@ -45,7 +45,7 @@
 										<tr class="odd pointer">
 									</c:otherwise>
 								</c:choose>
-								<td class=" ">${loop.index+1 }</td>
+								<td class=" ">${pageInfo.getOffset()+loop.index+1 }</td>
 								<td class=" ">${product.getId() }</td>
 								<td class=" ">${product.getProduct().getId() }</td>
 								<td class=" ">${product.getCode() }</td>
@@ -67,7 +67,31 @@
 							
 						</tbody>
 					</table>
-					
+					<div class="dataTables_paginate paging_simple_numbers"
+							id="datatable_paginate">
+							<ul class="pagination">
+								<li class="paginate_button previous disabled"
+									id="datatable_previous"><a href="<c:url value="/goods-recept/list/${crpage-1}"/>"
+									aria-controls="datatable" data-dt-idx="0" tabindex="0">Previous</a></li>
+								<c:forEach begin="1" end="${pageInfo.totalPages}"
+									varStatus="loop">
+									<c:choose>
+										<c:when test="${pageInfo.currentPage== loop.index}">
+											<li class="paginate_button active"><a
+												href="javascript:void(0);">${loop.index}</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="paginate_button "><a
+												href="<c:url value="/goods-recept/list/${loop.index}"/>">${loop.index}</a></li>
+										</c:otherwise>
+									</c:choose>
+
+									<li></li>
+								</c:forEach>
+								<li class="paginate_button next" id="datatable_next"><a
+									href="<c:url value="/goods-recept/list/${crpage+1}"/>" aria-controls="datatable" data-dt-idx="7" tabindex="0">Next</a></li>
+							</ul>
+						</div>
 				</div>
 				<div class="container" >
                     <a class="btn btn-app" href='<c:url value="/goods-recept/list/FormSearch"/>'>

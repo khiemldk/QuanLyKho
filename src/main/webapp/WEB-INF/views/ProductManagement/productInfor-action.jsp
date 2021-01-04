@@ -16,7 +16,7 @@
 				<div class="x_panel">
 					<div class="x_content">
 						<br />
-						<form:form modelAttribute="categoryForm"
+						<form:form modelAttribute="productForm"
 							cssClass="form-horizontal form-label-left"
 							servletRelativeAction="/category/save" method="POST">
 							<form:hidden path="id"/>

@@ -30,7 +30,9 @@
 									for="last-name">Product ID<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 ">
-									<form:input path="product.id" cssClass="form-control" />
+									<form:select path="product.id" cssClass="form-control">
+										<form:options  items="${idList}" />
+									</form:select>
 
 								</div>
 							</div>

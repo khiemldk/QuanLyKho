@@ -17,40 +17,79 @@
 			value="/WEB-INF/views/home.jsp"></put-attribute>
 	</definition>
 	<definition name="category-action" extends="master">
-		<put-attribute name="body" value="/WEB-INF/views/Category/Category-action.jsp"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/Category/Category-action.jsp"></put-attribute>
 	</definition>
 	<definition name="category-list" extends="master">
-		<put-attribute name="body" value="/WEB-INF/views/Category/category-list.jsp"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/Category/category-list.jsp"></put-attribute>
 	</definition>
 	<definition name="product-action" extends="master">
-		<put-attribute name="body" value="/WEB-INF/views/ProductManagement/productInfor-action.jsp"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/ProductManagement/productInfor-action.jsp"></put-attribute>
 	</definition>
 	<definition name="product-list" extends="master">
-		<put-attribute name="body" value="/WEB-INF/views/ProductManagement/productInfor-list.jsp"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/ProductManagement/productInfor-list.jsp"></put-attribute>
 	</definition>
 	<definition name="product-stock-list" extends="master">
-		<put-attribute name="body" value="/WEB-INF/views/Stock/productInStock-list.jsp"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/Stock/productInStock-list.jsp"></put-attribute>
 	</definition>
 	<definition name="product-stock-action" extends="master">
-		<put-attribute name="body" value="/WEB-INF/views/Stock/productInStock-action.jsp"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/Stock/productInStock-action.jsp"></put-attribute>
 	</definition>
 	<definition name="history" extends="master">
-		<put-attribute name="body" value="/WEB-INF/views/history/history.jsp"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/history/history.jsp"></put-attribute>
+	</definition>
+	<definition name="thong-ke" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/views/history/thong-ke.jsp"></put-attribute>
 	</definition>
 	<definition name="goods-recept-action" extends="master">
-		<put-attribute name="body" value="/WEB-INF/views/Invoice/Invoice-action.jsp"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/Invoice/Invoice-action.jsp"></put-attribute>
 	</definition>
 	<definition name="goods-recept-list" extends="master">
-		<put-attribute name="body" value="/WEB-INF/views/Invoice/Invoice-list.jsp"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/Invoice/Invoice-list.jsp"></put-attribute>
 	</definition>
-	<definition name="goods-recept-search" extends="master"> 
-		<put-attribute name="body" value="/WEB-INF/views/Invoice/Invoice-search.jsp"></put-attribute>
+	<definition name="goods-issue-list" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/views/Invoice/Invoice-list2.jsp"></put-attribute>
 	</definition>
-	<definition name="user-list" extends="master"> 
-		<put-attribute name="body" value="/WEB-INF/views/User/user-list.jsp"></put-attribute>
+	<definition name="goods-recept-search" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/views/Invoice/Invoice-search.jsp"></put-attribute>
 	</definition>
-	<definition name="user-action" extends="master"> 
-		<put-attribute name="body" value="/WEB-INF/views/User/user-action.jsp"></put-attribute>
+	<definition name="user-list" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/views/User/user-list.jsp"></put-attribute>
 	</definition>
-	
+	<definition name="user-action" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/views/User/user-action.jsp"></put-attribute>
+	</definition>
+	<definition name="changePassword" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/views/User/ChangePassword.jsp"></put-attribute>
+	</definition>
+	<definition name="role-list" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/views/Role/role-list.jsp"></put-attribute>
+	</definition>
+	<definition name="role-action" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/views/Role/role-action.jsp"></put-attribute>
+	</definition>
+	<definition name="menu" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/views/Menu/menu.jsp"></put-attribute>
+	</definition>
+	<definition name="menu-action" extends="master">
+		<put-attribute name="body"
+			value="/WEB-INF/views/Menu/Menu-action.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>

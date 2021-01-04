@@ -1,7 +1,9 @@
 package QuanLyKho.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,15 @@ public class ProductService {
 		log4j.info("update Category");
 		category.setActive_flag(true);
 		category.setUpdate_date(new Date());
+//		Map<String, Object> map1 = new HashMap();
+//		Map<String, Object> map2 = new HashMap();
+//		map1.put("name", category.getName());
+//		map1.put("code", category.getCode());
+//		map1.put("description", category.getDescription());
+//		map1.put("active_flag", category.getActive_flag());
+////		map1.put("create_date", category.getCreate_date());
+////		map1.put("update_date", category.getUpdate_date());
+//		map2.put("id", category.getId());
 		categoryDAO.update(category);
 	}
 	public void deleteCategory(category category) {
@@ -41,7 +52,7 @@ public class ProductService {
 	}
 	public List<category> findCategory(String property,Object value){
 		log4j.info("find Category");
-		return categoryDAO.findByProperty(property, value);
+		return categoryDAO.findByProperty(property, value,null);
 	}
 	public List<category> getAll( ){
 		return categoryDAO.findAll();
@@ -72,7 +83,7 @@ public class ProductService {
 	}
 	public List<product> findProductInfo(String property , Object value){
 		
-		return productDAO.findByProperty(property, value);
+		return productDAO.findByProperty(property, value,null);
 	}
 	public product findByIdProductInfo(int id) {
 		

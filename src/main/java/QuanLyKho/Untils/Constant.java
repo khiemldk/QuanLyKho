@@ -7,4 +7,5 @@ public class Constant {
 	public static final String History = "history";
 	public static final String ExportStockFIle ="export";
 	public static final String type ="type";
+	public static final String Err = "err";
 }

@@ -44,7 +44,7 @@
 								</label>
 								<div class="col-md-6 col-sm-6 ">
 									<form:select path="product.id" cssClass="form-control">
-										<form:options items="${idList}" />
+										<form:options  items="${idList}"/>
 									</form:select>
 
 								</div>
